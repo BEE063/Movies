@@ -10,7 +10,7 @@
 <div>
     <h4>Actor</h4>
     <hr />
-<table class="table">
+    <table class="table">
         <thead>
             <tr>
                 <th>
@@ -31,23 +31,24 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @item.Name
-                </td>
-                <td>
-                    @item.Surname
-                </td>
-                <td>
-                    @item.DateOfBirth.ToString("dd.MM.yyyy")
-                </td>
-                <td>
-                    @item.Movie.Title
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Index">Back to List</a>
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Surname
+                    </td>
+                    <td>
+                        @item.DateOfBirth.ToString("dd.MM.yyyy")
+                    </td>
+                    <td>
+                        @item.Movie.Title
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Index">Back to List</a>
+                    </td>
+                </tr>
             }
+    </table>
 </div>

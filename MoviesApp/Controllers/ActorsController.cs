@@ -2,20 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MoviesApp.Data;
+using MoviesApp.Filters;
+using MoviesApp.Middleware;
 using MoviesApp.Models;
 using MoviesApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace MoviesApp.Controllers
 {
     public class ActorsController:Controller
     {
         private readonly MoviesContext _context;
         private readonly ILogger<HomeController> _logger;
-
 
         public ActorsController(MoviesContext context, ILogger<HomeController> logger)
         {
@@ -77,6 +77,7 @@ namespace MoviesApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [IncorrectAge]
         public IActionResult Create([Bind("Name,Surname,DateOfBirth")] InputActorViewModel inputModel)
         {
             if (ModelState.IsValid)

@@ -11,7 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MoviesApp.Controllers;
 using MoviesApp.Data;
+using MoviesApp.Middleware;
 
 namespace MoviesApp
 {
@@ -39,6 +41,7 @@ namespace MoviesApp
         {
             if (env.IsDevelopment())
             {
+                app.UseRequestLog();
                 app.UseDeveloperExceptionPage();
             }
 
