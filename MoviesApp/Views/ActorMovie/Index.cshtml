@@ -1,0 +1,48 @@
+﻿@using System.Linq
+@model IEnumerable<MoviesApp.ViewModels.ActorMovieViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="@Model.First().Actor.Name"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.First().Actor.Surname"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.First().Actor.DateOfBirth"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.First().Movie"></label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Actor.Name
+                </td>
+                <td>
+                    @item.Actor.Surname
+                </td>
+                <td>
+                    @item.Actor.DateOfBirth.ToString("dd.MM.yyyy")
+                </td>
+                <td>
+                    @item.Movie.Title
+                </td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

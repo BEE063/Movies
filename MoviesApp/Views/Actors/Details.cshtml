@@ -2,53 +2,50 @@
 @model IEnumerable<MoviesApp.ViewModels.ActorViewModel>
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Details</h1>
+<h1>Index</h1>
 
-<div>
-    <h4>Actor</h4>
-    <hr />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    <label asp-for="@Model.First().Name"></label>
-                </th>
-                <th>
-                    <label asp-for="@Model.First().Surname"></label>
-                </th>
-                <th>
-                    <label asp-for="@Model.First().DateOfBirth"></label>
-                </th>
-                <th>
-                    <label asp-for="@Model.First().Movie"></label>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @item.Name
-                    </td>
-                    <td>
-                        @item.Surname
-                    </td>
-                    <td>
-                        @item.DateOfBirth.ToString("dd.MM.yyyy")
-                    </td>
-                    <td>
-                        @item.Movie.Title
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Index">Back to List</a>
-                    </td>
-                </tr>
-            }
-    </table>
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="@Model.First().Movie.Title"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.First().Name"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.First().Surname"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.First().DateOfBirth"></label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @item.Movie.Title
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Surname
+            </td>
+            <td>
+                @item.DateOfBirth.ToString("dd.MM.yyyy")
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

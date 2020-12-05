@@ -22,6 +22,6 @@ namespace MoviesApp.ViewModels
         [Range(0, 999.99)]
         public decimal Price { get; set; }
 
-        public virtual ICollection<ActorMovie> Actors { get; set; }
+        public virtual ICollection<ActorMovie> ActorMovies { get; set; }
     }
 }
