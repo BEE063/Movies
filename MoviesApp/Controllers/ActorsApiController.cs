@@ -62,7 +62,7 @@ namespace MoviesApp.Controllers
                 _context.Update(actor);
                 _context.SaveChanges();
 
-                return Ok(_mapper.Map<EditMovieViewModel>(actor));
+                return Ok(_mapper.Map<EditActorViewModel>(actor));
             }
             catch (DbUpdateException)
             {
@@ -89,7 +89,7 @@ namespace MoviesApp.Controllers
 
         private bool ActorExists(int id)
         {
-            return _context.Movies.Any(e => e.Id == id);
+            return _context.Actors.Any(a => a.Id == id);
         }
     }
 }
