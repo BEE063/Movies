@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MoviesApp.Models;
+using MoviesApp.Services.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MoviesApp.ViewModels.AutoMapperProfiles
     {
         public ActorMovieProfile()
         {
-            CreateMap<ActorMovie, ActorMovieViewModel>();
+            CreateMap<ActorMovieDto, ActorMovieViewModel>();
         }
     }
 }

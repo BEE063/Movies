@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MoviesApp.Data;
-using MoviesApp.Models;
-using MoviesApp.ViewModels;
+using MoviesApp.Services;
+using MoviesApp.Services.Dto;
 
 namespace MoviesApp.Controllers
 {
@@ -13,31 +9,29 @@ namespace MoviesApp.Controllers
     [ApiController]
     public class ActorMovieApiController : ControllerBase
     {
-        private readonly MoviesContext _context;
-        private readonly IMapper _mapper;
+        private readonly IActorMovieService _service;
 
-        public ActorMovieApiController(MoviesContext context, IMapper mapper)
+        public ActorMovieApiController(IActorMovieService service)
         {
-            _context = context;
-            _mapper = mapper;
+            _service = service;
         }
 
         [HttpGet] // GET: /api/actormovies
-        [ProducesResponseType(200, Type = typeof(IEnumerable<ActorMovieViewModel>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ActorMovieDto>))]
         [ProducesResponseType(404)]
-        public ActionResult<IEnumerable<ActorMovieViewModel>> GetActorMovies()
+        public ActionResult<IEnumerable<ActorMovieDto>> GetActorMovies()
         {
-            var actorMovies = _mapper.Map<IEnumerable<ActorMovie>, IEnumerable<ActorMovieViewModel>>(_context.ActorMovies.ToList());
-            return Ok(actorMovies);
+            return Ok(_service.GetAllActorMovies());
         }
-        [HttpGet("{id}")] // GET: /api/actors/5
-        [ProducesResponseType(200, Type = typeof(ActorMovieViewModel))]
+
+        [HttpGet("{id}")] // GET: /api/actormovies/5
+        [ProducesResponseType(200, Type = typeof(ActorMovieDto))]
         [ProducesResponseType(404)]
         public IActionResult GetById(int id)
         {
-            var actorMovie = _mapper.Map<ActorMovieViewModel>(_context.ActorMovies.FirstOrDefault(am => am.ActorId == id));
-            if (actorMovie == null) return NotFound();
-            return Ok(actorMovie);
+            var actor = _service.GetActorMovie(id);
+            if (actor == null) return NotFound();
+            return Ok(actor);
         }
     }
 }

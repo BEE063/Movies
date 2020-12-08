@@ -1,51 +1,36 @@
-@using System.Linq
-@model IEnumerable<MoviesApp.ViewModels.ActorViewModel>
+@model MoviesApp.ViewModels.ActorViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Details";
 }
 
-<h1>Index</h1>
+<h1>Details</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                <label asp-for="@Model.First().Movie.Title"></label>
-            </th>
-            <th>
-                <label asp-for="@Model.First().Name"></label>
-            </th>
-            <th>
-                <label asp-for="@Model.First().Surname"></label>
-            </th>
-            <th>
-                <label asp-for="@Model.First().DateOfBirth"></label>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @item.Movie.Title
-            </td>
-            <td>
-                @item.Name
-            </td>
-            <td>
-                @item.Surname
-            </td>
-            <td>
-                @item.DateOfBirth.ToString("dd.MM.yyyy")
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Index">Back to List</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <label asp-for="Name"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Name
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Surname"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Surname
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="DateOfBirth"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.DateOfBirth.ToString("dd.MM.yyyy")
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

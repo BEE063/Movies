@@ -1,60 +1,42 @@
-@using System.Linq
-@model IEnumerable<MoviesApp.ViewModels.MovieViewModel>
+@model MoviesApp.ViewModels.MovieViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
 <h1>Details</h1>
-<h4>Movie</h4>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                <label asp-for="@Model.First().Title"></label>
-            </th>
-            <th>
-                <label asp-for="@Model.First().ReleaseDate"></label>
-            </th>
-            <th>
-                <label asp-for="@Model.First().Genre"></label>
-            </th>
-            <th>
-                <label asp-for="@Model.First().Price"></label>
-            </th>
-            <th>
-                <label asp-for="@Model.First().Actor"></label>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @item.Title
-                </td>
-                <td>
-                    @item.ReleaseDate.ToString("dd.MM.yyyy")
-                </td>
-                <td>
-                    @item.Genre
-                </td>
-                <td>
-                    @item.Price
-                </td>
-                <td>
-                    @item.Actor.Name
-                    @item.Actor.Surname
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Index">Back to List</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <label asp-for="Title"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Title
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="ReleaseDate"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ReleaseDate.ToString("dd.MM.yyyy")
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Genre"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Genre
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Price"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Price
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

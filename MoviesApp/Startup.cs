@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using MoviesApp.Controllers;
 using MoviesApp.Data;
 using MoviesApp.Middleware;
+using MoviesApp.Services;
 
 namespace MoviesApp
 {
@@ -36,7 +37,14 @@ namespace MoviesApp
             services.AddDbContext<MoviesContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MoviesContext")));
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
             services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IActorService, ActorService>();
+            services.AddScoped<IActorMovieService, ActorMovieService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
