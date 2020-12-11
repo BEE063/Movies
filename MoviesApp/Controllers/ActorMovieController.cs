@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using MoviesApp.Services;
 using MoviesApp.Services.Dto;
 using MoviesApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MoviesApp.Controllers
 {
@@ -23,6 +24,7 @@ namespace MoviesApp.Controllers
 
         // GET: Actors
         [HttpGet]
+        [Authorize]
         public IActionResult Index()
         {
             var actorMovies = _mapper.Map<IEnumerable<ActorMovieDto>, IEnumerable<ActorMovieViewModel>>(_service.GetAllActorMovies());

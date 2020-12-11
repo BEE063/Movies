@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MoviesApp.Filters;
@@ -24,6 +25,7 @@ namespace MoviesApp.Controllers
 
         // GET: Actors
         [HttpGet]
+        [Authorize]
         public IActionResult Index()
         {
             var actors = _mapper.Map<IEnumerable<ActorDto>, IEnumerable<ActorViewModel>>(_service.GetAllActors());
@@ -32,6 +34,7 @@ namespace MoviesApp.Controllers
 
         // GET: Actors/Details/5
         [HttpGet]
+        [Authorize]
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -51,6 +54,7 @@ namespace MoviesApp.Controllers
 
         // GET: Actors/Create
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -73,6 +77,7 @@ namespace MoviesApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         // GET: Actorss/Edit/5
         public IActionResult Edit(int? id)
         {
@@ -96,6 +101,7 @@ namespace MoviesApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id, EditMovieViewModel editModel)
         {
             if (ModelState.IsValid)
@@ -117,6 +123,7 @@ namespace MoviesApp.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         // GET: Actors/Delete/5
         public IActionResult Delete(int? id)
         {
@@ -138,6 +145,7 @@ namespace MoviesApp.Controllers
         // POST: Actors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult DeleteConfirmed(int id)
         {
             var actor = _service.DeleteActor(id);
